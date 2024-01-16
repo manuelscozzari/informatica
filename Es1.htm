@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stampa Numeri</title>
+    <script>
+        function stampaNumeri() {
+            var inputNumero = document.getElementById("numeroInput").value;
+
+        
+            if (isNaN(inputNumero) || inputNumero <= 0) {
+                alert("Inserisci un numero valido.");
+                return;
+            }
+            document.getElementById("output").innerHTML = "";
+
+            for (var i = 1; i <= inputNumero; i++) {
+                document.getElementById("output").innerHTML += i + "<br>";
+            }
+
+            var dieciPercento = Math.floor(inputNumero * 0.1);
+            document.getElementById("output").innerHTML += "10%: " + dieciPercento;
+        }
+    </script>
+</head>
+<body>
+
+    <h1>Stampa Numeri</h1>
+
+    <label for="numeroInput">Inserisci un numero: </label>
+    <input type="number" id="numeroInput">
+
+    <button onclick="stampaNumeri()">Stampa Numeri</button>
+
+    <div id="output"></div>
+
+</body>
+</html>
