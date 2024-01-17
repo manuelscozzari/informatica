@@ -9,34 +9,27 @@
 <body>
 
 <script>
-
     function stampaTabellina() {
         for (let i = 1; i <= 10; i++) {
             console.log(i);
         }
     }
 
-    // Variabile per il contatore
-    let contatore = 1;
-
+    let contatore = 0;
 
     function azioneOgniSecondo() {
-
-        contatore++;
-
-  
-        console.log(contatore);
-
-
-        if (contatore === 5) {
+        if (contatore < 5) {
+            contatore++;
+            console.log(contatore);
+        } else {
             stampaTabellina();
-            contatore = 0; // Resetta il contatore a 1
+            contatore = 1;
         }
     }
-
 
     setInterval(azioneOgniSecondo, 1000);
 </script>
 
 </body>
 </html>
+
