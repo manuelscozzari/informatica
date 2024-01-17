@@ -11,7 +11,7 @@
 <script>
     function stampaTabellina() {
         for (let i = 1; i <= 10; i++) {
-            console.log(i);
+            document.write(i + "<br>");
         }
     }
 
@@ -20,7 +20,7 @@
     function azioneOgniSecondo() {
         if (contatore < 5) {
             contatore++;
-            console.log(contatore);
+            document.write(contatore + "<br>");
         } else {
             stampaTabellina();
             contatore = 1;
@@ -32,4 +32,3 @@
 
 </body>
 </html>
-
