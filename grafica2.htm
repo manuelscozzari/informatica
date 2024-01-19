@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .dynamic-div {
+      width: 10px;
+      height: 10px;
+      border: 1px solid black;
+      margin: 2px;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+
+  <label for="numeroDiv">Inserisci il numero di div:</label>
+  <input type="number" id="numeroDiv" min="1" value="1">
+  <button onclick="creaDiv()">Genera Div</button>
+
+  <div id="contenitoreDiv"></div>
+
+  <script>
+    function creaDiv() {
+      var numeroDiv = document.getElementById("numeroDiv").value;
+      var contenitoreDiv = document.getElementById("contenitoreDiv");
+      contenitoreDiv.innerHTML = '';
+
+      for (var i = 0; i < numeroDiv; i++) {
+        var nuovoDiv = document.createElement("div");
+        nuovoDiv.classList.add("dynamic-div");
+        contenitoreDiv.appendChild(nuovoDiv);
+      }
+    }
+  </script>
+
+</body>
+</html>
