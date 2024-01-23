@@ -29,15 +29,19 @@
 </head>
 <body>
 
-    <?php
-    for ($i = 0; $i < 10; $i++) {
-        for ($j = 0; $j < 10; $j++) {
-            $numero = $i * 10 + $j + 1;
-            $classe = ($numero % 2 == 0) ? 'pari' : 'dispari';
-            echo "<div class='quadrato $classe'></div>";
-        }
-    }
-    ?>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            for (let i = 1; i <= 100; i++) {
+                let quadrato = document.createElement("div");
+                quadrato.className = "quadrato " + (i % 2 === 0 ? "pari" : "dispari");
+                document.body.appendChild(quadrato);
+
+                if (i % 10 === 0) {
+                    document.body.appendChild(document.createElement("br"));
+                }
+            }
+        });
+    </script>
 
 </body>
 </html>
