@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akinator</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        #game-container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #3498db;
+        }
+
+        p {
+            font-size: 18px;
+            margin: 20px 0;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 0 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #3498db;
+            color: #fff;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        #reset {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <h1>AKINATOR</h1>
+        <p id="question"></p>
+        <button id="yes-btn" onclick="rispondi('s')">Sì</button>
+        <button id="no-btn" onclick="rispondi('n')">No</button>
+        <p id="result"></p>
+        <button id="reset" onclick="resetGame()">Reset</button>
+    </div>
+
+    <script>
+        var personaggi = [
+            { nome: "Albert Einstein", domande: ["Il personaggio è un fisico?", "Ha vinto il premio Nobel?", "È noto per la teoria della relatività?"] },
+            { nome: "Ada Lovelace", domande: ["Il personaggio è un informatico?", "Ha vissuto nel XIX secolo?", "È considerata la prima programmatrice?"] },
+            { nome: "Marie Curie", domande: ["Il personaggio è un chimico?", "È stata la prima donna a vincere un Nobel in due campi diversi?", "Ha scoperto il polonio e il radio?"] },
+            { nome: "Nikola Tesla", domande: ["Il personaggio è un inventore?", "È conosciuto per il lavoro con l'elettricità?", "Ha lavorato con la corrente alternata?"] },
+            { nome: "Galileo Galilei", domande: ["Il personaggio è un astronomo?", "Ha inventato il telescopio?", "Ha supportato il modello eliocentrico?"] },
+            { nome: "Leonardo da Vinci", domande: ["Il personaggio è un artista?", "È noto anche come inventore?", "Ha dipinto la Gioconda?"] },
+            { nome: "Isaac Newton", domande: ["Il personaggio è un matematico?", "Ha formulato la legge di gravitazione universale?", "Ha scritto i Principia Mathematica?"] },
+            { nome: "Charles Darwin", domande: ["Il personaggio è un biologo?", "Ha sviluppato la teoria dell'evoluzione?", "Ha scritto L'origine delle specie?"] }
+        ];
+
+        var currentPersonaggioIndex = 0;
+        var currentQuestionIndex = 0;
+
+        function mostraDomanda() {
+            if (currentPersonaggioIndex < personaggi.length) {
+                var questionElement = document.getElementById('question');
+                var currentPersonaggio = personaggi[currentPersonaggioIndex];
+                if (currentQuestionIndex < currentPersonaggio.domande.length) {
+                    questionElement.textContent = currentPersonaggio.domande[currentQuestionIndex];
+                } else {
+                    questionElement.textContent = "Hai indovinato! Il personaggio è " + currentPersonaggio.nome + ".";
+                    document.getElementById('reset').style.display = 'inline-block';
+                    nascondiDomande();
+                }
+            } else {
+                document.getElementById('question').textContent = "Mi dispiace, non ho indovinato il personaggio.";
+                document.getElementById('reset').style.display = 'inline-block';
+                nascondiDomande();
+            }
+        }
+
+        function rispondi(risposta) {
+            if (currentPersonaggioIndex < personaggi.length) {
+                var currentPersonaggio = personaggi[currentPersonaggioIndex];
+                if (risposta === 's') {
+                    currentQuestionIndex++;
+                    if (currentQuestionIndex < currentPersonaggio.domande.length) {
+                        mostraDomanda();
+                    } else {
+                        document.getElementById('result').textContent = "Hai indovinato! Il personaggio è " + currentPersonaggio.nome + ".";
+                        document.getElementById('reset').style.display = 'inline-block';
+                        nascondiDomande();
+                    }
+                } else {
+                    currentPersonaggioIndex++;
+                    currentQuestionIndex = 0;
+                    mostraDomanda();
+                }
+            } else {
+                document.getElementById('result').textContent = "Mi dispiace, non ho indovinato il personaggio.";
+                document.getElementById('reset').style.display = 'inline-block';
+                nascondiDomande();
+            }
+        }
+
+        function nascondiDomande() {
+            document.getElementById('question').style.display = 'none';
+            document.getElementById('yes-btn').style.display = 'none';
+            document.getElementById('no-btn').style.display = 'none';
+        }
+
+        function mostraDomande() {
+            document.getElementById('question').style.display = 'block';
+            document.getElementById('yes-btn').style.display = 'inline-block';
+            document.getElementById('no-btn').style.display = 'inline-block';
+        }
+
+        function resetGame() {
+            currentPersonaggioIndex = 0;
+            currentQuestionIndex = 0;
+            document.getElementById('result').textContent = '';
+            document.getElementById('reset').style.display = 'none';
+            mostraDomande();
+            mostraDomanda();
+        }
+
+        mostraDomanda();
+    </script>
+</body>
+</html>
